@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Card from './Card'
 
-function Cards(){
+function Cards() {
     const [items, setItems] = useState([
         { id: 1, img: '/img/html.png', stat: "" },
         { id: 1, img: '/img/html.png', stat: "" },
@@ -19,46 +19,50 @@ function Cards(){
         { id: 7, img: '/img/angular.png', stat: "" },
         { id: 8, img: '/img/nodejs.png', stat: "" },
         { id: 8, img: '/img/nodejs.png', stat: "" }
-    ].sort(() => Math.random() - 0.5))
+    ].sort(() => Math.random() - 0.5));
 
-    const [prev, setPrev] = useState(-1)
+    const [prev, setPrev] = useState(-1);
 
-    function check(current){
-        if(items[current].id === items[prev].id){
-            items[current].stat = "correct"
-            items[prev].stat = "correct"
-            setItems([...items])
-            setPrev(-1)
-        }else{
-            items[current].stat = "wrong"
-            items[prev].stat = "wrong"
-            setItems([...items])
+    function check(current) {
+        if (items[current].id === items[prev].id) {
+            items[current].stat = "correct";
+            items[prev].stat = "correct";
+            setItems([...items]);
+            setPrev(-1);
+        } else {
+            items[current].stat = "wrong";
+            items[prev].stat = "wrong";
+            setItems([...items]);
             setTimeout(() => {
-                items[current].stat = ""
-                items[prev].stat = ""
-                setItems([...items])
-                setPrev(-1)
-            }, 1000)
+                items[current].stat = "";
+                items[prev].stat = "";
+                setItems([...items]);
+                setPrev(-1);
+            }, 1000);
         }
     }
 
-    function handleClick(id){
-        if(prev === -1){
-            items[id].stat = "active"
-            setItems([...items])
-            setPrev(id)
-        }else{
-            check(id)
+    function handleClick(index) {
+        if (items[index].stat === "correct" || items[index].stat === "active") {
+            return; // Evitar clics en tarjetas ya correctas o activas
+        }
+
+        if (prev === -1) {
+            items[index].stat = "active";
+            setItems([...items]);
+            setPrev(index);
+        } else {
+            check(index);
         }
     }
 
     return (
         <div className="container">
-            { items.map((item, index) => (
+            {items.map((item, index) => (
                 <Card key={index} item={item} id={index} handleClick={handleClick} />
-            )) }
+            ))}
         </div>
-    )
+    );
 }
 
-export default Cards
+export default Cards;
