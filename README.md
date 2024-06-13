@@ -17,6 +17,7 @@
 - **HTML5**: Estructura del juego.
 - **CSS3**: Estilos y diseño responsivo.
 - **JavaScript**: Lógica del juego.
+- **React**: Biblioteca de JavaScript para construir interfaces de usuario.
 
 ## Instalación
 
